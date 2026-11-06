@@ -1,0 +1,106 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom' // 👈 1. นำเข้า Hook สำหรับสั่งเปลี่ยนพาร์ทหน้าเว็บ
+
+export default function Loginfrom() {
+  const navigate = useNavigate() // 👈 2. ประกาศเรียกใช้งานตัวนำทางย้ายหน้าเว็บ
+  const [showPass, setShowPass] = useState(false)
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
+  const [loginError, setLoginError] = useState('')
+  const [loginForm, setLoginForm] = useState({
+    username: '',
+    password: '',
+  })
+
+  const handleLoginChange = (event) => {
+    const { name, value } = event.target
+    setLoginError('')
+    setLoginForm((current) => ({
+      ...current,
+      [name]: value,
+    }))
+  }
+
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    const username = loginForm.username.trim()
+    const password = loginForm.password
+
+    if (!username || !password) {
+      setLoginError('กรุณากรอก Username และ Password')
+      return
+    }
+
+    setIsLoggingIn(true)
+    setLoginError('')
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        // 💾 3. เก็บข้อมูลโทเคนหรือข้อมูลแอดมินลง Session/Local Storage (เพื่อให้ระบบจำสถานะได้)
+        localStorage.setItem('adminUser', JSON.stringify(data.user));
+        
+        // 🚀 4. สั่งดีดตัวพาแอดมินมุ่งหน้าไปยังหน้าแดชบอร์ดดัชนีรวมหลังบ้านทันทีค๊าา!
+        navigate("/admin"); // 💡 หากใน App.jsx ตั้งชื่อพาร์ทหน้าสถิติไว้เป็นชื่ออื่น (เช่น "/dashboard") ให้เปลี่ยนตรงนี้ได้เลยนะคะน้า
+        
+      } else {
+        setLoginError(data.message || 'ข้อมูลไม่ถูกต้อง');
+      }
+    } catch (error) {
+      setLoginError('เชื่อมต่อ Server ไม่ได้');
+    } finally {
+      setIsLoggingIn(false)
+    }
+  }
+
+  // 🖨️ แสดงหน้าฟอร์ม Login เสมอ (เอาเงื่อนไข if(!member) ตัวเก่าออกเพื่อให้ระบบย้ายหน้าแบบสากล)
+  return (
+    <div className="login-box">
+      <h3>Login</h3>
+      <form onSubmit={handleLogin}>
+        <div className="input-group">
+          <label style={{display: 'block', marginBottom: '8px', fontSize: '14px', color: '#1a1d20', fontWeight: '500'}}>Username</label>
+          <div className="input-container">
+            <input
+              name="username"
+              type="text"
+              placeholder="Enter your username"
+              value={loginForm.username}
+              onChange={handleLoginChange}
+            />
+          </div>
+        </div>
+
+        <div className="input-group">
+          <label style={{display: 'block', marginBottom: '8px', fontSize: '14px', color: '#1a1d20', fontWeight: '500'}}>Password</label>
+          <div className="input-container">
+            <input
+              name="password"
+              type={showPass ? "text" : "password"}
+              placeholder="Enter your password"
+              value={loginForm.password}
+              onChange={handleLoginChange}
+            />
+          </div>
+          <div className="forgot-link-center">
+            <a href="#" onClick={(e) => { e.preventDefault(); alert("กรุณาติดต่อผู้ดูแลระบบเพื่อรีเซ็ตรหัสผ่าน"); }}>
+              Forgot Password?
+            </a>
+          </div>
+        </div>
+
+        <button className="btn-login" type="submit" disabled={isLoggingIn}>
+          {isLoggingIn ? 'Checking...' : 'Login to Event Gateway'}
+        </button>
+        
+        {loginError && <p className="form-message error">{loginError}</p>}
+      </form>
+    </div>
+  );
+}

@@ -1,0 +1,6 @@
+node_modules/
+.env
+src/uploads/events/*
+!src/uploads/events/.gitkeep
+firebase-key.json
+*.log

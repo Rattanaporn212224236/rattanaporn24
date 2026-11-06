@@ -1,0 +1,83 @@
+/* src/index.css — Global theme tokens: KUSE premium enterprise dashboard (Burgundy & Gold) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Kanit:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* --- Color palette: Burgundy & Warm Gold, enterprise-luxury --- */
+  --color-primary: #7B1113;        /* Burgundy — main identity */
+  --color-primary-dark: #570C0E;   /* Deep Wine — hover/active shade */
+  --color-primary-light: #F7E7E8;  /* soft burgundy tint for backgrounds/badges */
+  --color-secondary: #5C1A1D;      /* Deep Wine — secondary accents */
+  --color-accent: #C9A24B;         /* Warm/Soft Gold — decorative accent only */
+
+  --color-gradient: linear-gradient(135deg, #8B1416, #570C0E);
+
+  --color-bg: #F6F7FB;
+  --color-card: #FFFFFF;
+  --color-border: #E7E8F0;
+
+  --color-text-primary: #26262E;
+  --color-text-secondary: #6B6B78;
+
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger: #DC2626;
+
+  /* --- Popup colors --- */
+  --popup-warning-bg: #FDF3DA;
+  --popup-warning-border: #F0C14B;
+  --popup-danger-bg: #FBE3E1;
+  --popup-danger-border: #DC2626;
+
+  /* extra chart colors (burgundy/wine/gold family, kept distinguishable) */
+  --chart-red: #7B1113;
+  --chart-orange: #C9A24B;
+  --chart-gold: #C9A24B;
+  --chart-green: #22C55E;
+  --chart-blue: #3B82F6;
+
+  /* --- Shadows --- */
+  --shadow-sm: 0 1px 2px rgba(38, 38, 46, 0.05);
+  --shadow-md: 0 10px 26px -10px rgba(123, 17, 19, 0.16);
+  --shadow-lg: 0 18px 44px -14px rgba(123, 17, 19, 0.22);
+
+  /* --- Radius --- */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+
+  /* --- Typography scale --- */
+  --font-h1: 36px;
+  --font-h2: 28px;
+  --font-h3: 22px;
+  --font-h4: 17px;
+  --font-body: 16px;
+  --font-caption: 14px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Prompt', 'Inter', 'Kanit', sans-serif;
+}
+
+html, body {
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+/* smooth, subtle motion only — no bouncing / cartoon effects */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}

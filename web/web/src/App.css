@@ -1,0 +1,96 @@
+/* 1. ส่วนของ Font และพื้นฐาน (Global) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Kanit:wght@200;300;500;700&display=swap');
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Kanit', 'Inter', sans-serif; 
+}
+
+/* 2. ส่วนของพื้นหลังหน้า Login (ที่เคยอยู่ใน body) */
+.login-body { 
+    height: 100vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    /* อย่าลืมย้ายรูป K88.jpg ไปไว้ในโฟลเดอร์ public/assets นะคะ */
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
+                url('/assets/K88.jpg'); 
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+/* 3. สไตล์ของกล่อง Login และส่วนประกอบต่างๆ (ยกมาจาก <style> เดิม) */
+.main-container {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    padding: 10px;
+}
+
+.brand-section { margin-bottom: 25px; }
+
+.main-logo {
+    width: 280px;
+    height: auto;
+    border-radius: 40px;
+    margin-bottom: 20px;
+    transition: 0.3s ease-in-out;
+}
+
+.system-title {
+    color: #ffffff;
+    font-size: 30px; 
+    font-weight: 700;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.eng-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+}
+
+.login-box { 
+    background: rgba(25, 25, 25, 0.95); 
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 50px;
+    border-radius: 50px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    backdrop-filter: blur(20px);
+}
+
+.input-container input { 
+    width: 100%; 
+    padding: 16px 22px; 
+    border-radius: 18px;
+    border: 1.5px solid #444; 
+    background: rgba(255, 255, 255, 0.04); 
+    color: white; 
+    outline: none;
+    margin-bottom: 20px;
+}
+
+.btn-login { 
+    width: 100%; 
+    padding: 18px; 
+    background: #801B1B; 
+    color: white; 
+    border: none; 
+    border-radius: 18px; 
+    font-weight: 600; 
+    cursor: pointer;
+}
+
+.footer-text {
+    margin-top: 20px; 
+    font-size: 11px; 
+    color: rgba(255,255,255,0.3);
+}
